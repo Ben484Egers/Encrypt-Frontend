@@ -3,7 +3,6 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
   apiBaseUrl: 'https://encrypt-backend-production.up.railway.app/api/v1/messages'
 };
 
