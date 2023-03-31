@@ -1,0 +1,43 @@
+<form (ngSubmit)="findMessage()" class="find-message">
+    <div class="outer-form">
+        <div class="form-control message-id">
+            <label for="messageId">Message ID</label>
+            <input type="text" name="message id" [(ngModel)]="messageId" id="msg-id" placeholder="Message Id:">
+        </div>
+
+        <div class="form-control find-cover">
+            <label>Find</label>
+            <input type="submit" value="Find" class="btn btn-find">
+        </div>
+    </div>
+</form>
+
+
+<form (ngSubmit)="onSubmit()" class="decrypt-message">
+    <div class="outer-form">
+        <div class="form-control text">
+            <label for="message">Message</label>
+            <textarea name="message" [(ngModel)]="message" id="text" placeholder="Message comes here"></textarea>
+        </div>
+        <div class="form-control key">
+            <label for="key">Key</label>
+            <input type="number" name="key" [(ngModel)]="key" id="number" max="26" min="1" placeholder="[1 - 26]">
+        </div>
+    </div>
+
+    <div class="outer-form2">
+        <input type="submit" value="Decrypt" class="btn btn-decrypt" *ngIf="!decrypted">
+        <button type="submit" class="btn btn-delete" *ngIf="decrypted">Delete</button>
+    </div>
+</form>
+
+<!-- <div class="response-field">
+    <div class="txt-area">
+        <label for="crypt">Message</label>
+        <textarea name="message" [(ngModel)]="message" id="cryptText" placeholder="Response..."></textarea>
+    </div>
+    <div class="save-area">
+        <input type="submit" value="Delete" class="btn btn-save" (click)="deleteMessage()">
+
+    </div>
+</div> -->

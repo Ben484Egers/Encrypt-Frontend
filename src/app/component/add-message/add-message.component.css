@@ -1,0 +1,112 @@
+.add-message{
+    width: 100%;
+    margin: 1rem 0;
+}
+
+.btn{
+    padding: 10px 15px;
+    background-color: transparent;
+    outline: none;
+    border-radius: 5px;
+    color:rgb(231, 231, 223);
+    text-transform: uppercase;
+}
+
+.btn-encrypt{
+    color: #fff;
+    border: none;
+    background-color: rgb(52, 50, 214);;
+}
+.btn-save{
+    color: var(--green);
+    border: 1px solid var(--green);
+}
+
+.btn-encrypt:hover{
+    opacity: 0.7;
+}
+.btn-save:hover{
+    background-color: green;
+    color: #fff;
+}
+
+
+.outer-form{
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 0 1rem;
+}
+
+.form-control label{
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.outer-form textarea,
+.outer-form input{
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
+    border: none;
+    background-color: #e4dfdf;
+}
+
+.outer-form .text{
+    flex: 4;
+}
+
+.outer-form .key{
+    flex: 1;
+}
+
+textarea{
+    resize: none;
+    outline: none;
+    min-height: 200px;
+    width: 100%;
+    min-width: 140px;
+    padding: 0.5rem ;
+    border-radius: 4px;
+}
+input[type=number]::placeholder {
+    font-size: 1rem;
+}
+
+textarea[placeholder] {
+    font-size: 1.2rem;
+}
+
+.key input{
+    width: 85px;
+    border-radius: 2px;
+    outline: none;
+}
+
+@media (max-width: 600px) {
+    .form-control label{
+        font-size:1.2rem;
+    }
+
+    .form-control input,
+    .form-control textarea{
+        font-size: 1rem;
+    }
+
+    .form-control textarea{
+        min-width: 250px;
+    }
+
+    input[type=number]{
+        width: 75px;
+    }
+
+    .key{
+        margin-top: -0.8rem;
+    }
+
+    input[type=number]::placeholder {
+        font-size: 0.8rem;
+    }
+}

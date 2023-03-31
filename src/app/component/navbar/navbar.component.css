@@ -1,0 +1,58 @@
+nav{
+    width: 90%;
+    height: 5vh;
+    margin: 0 auto;
+    padding: 0.5rem 1rem;
+}
+
+ul{
+    list-style: none;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+ul a{
+    text-decoration: none;
+    font-size: 1.5rem;
+}
+
+ul li .active{
+    font-weight: 700;
+}
+
+ul li .branding{
+    font-size: 2.2rem;
+    color: rgb(148, 13, 148);
+    font-weight: 700;
+}
+
+.encrypt{
+    color: var(--blue);
+}
+
+.decrypt{
+    color: var(--red);
+}
+
+@media(max-width: 750px) {
+    nav{
+        width: 95%;
+    }
+
+    nav .encrypt,
+    nav .decrypt{
+        font-size: 1rem;
+    }
+
+    nav ul li .branding{
+        font-size: 1.5rem;
+    }
+}
+
+@media(max-width: 450px) {
+    nav ul li .branding{
+        font-size: 1.2rem;
+    }
+}

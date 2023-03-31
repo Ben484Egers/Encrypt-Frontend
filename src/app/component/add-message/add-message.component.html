@@ -1,0 +1,29 @@
+<form (ngSubmit)="onSubmit()" class="add-message">
+    <div class="outer-form">
+        <div class="form-control text">
+            <label for="message">Message</label>
+            <textarea name="message" [(ngModel)]="message" id="text" placeholder="Add message"></textarea>
+        </div>
+        <div class="form-control key">
+            <label for="key">Key</label>
+            <input type="number" name="key" [(ngModel)]="key" id="number" max="26" min="1" placeholder="[1 - 26]">
+        </div>
+    </div>
+
+    <div class="outer-form2">
+        <input type="submit" value="Encrypt" class="btn btn-encrypt" *ngIf="!encrypted">
+        <button type="submit" class="btn btn-save" *ngIf="encrypted">Save</button>
+    </div>
+
+</form>
+
+<!-- <div class="response-field">
+    <div class="txt-area">
+        <label for="crypt">Response</label>
+        <textarea name="crypt" [(ngModel)]="crypt" id="cryptText" placeholder="Response..."></textarea>
+    </div>
+    <div class="save-area">
+        <input type="submit" value="Save" class="btn btn-save" (click)="saveCrypt()">
+
+    </div>
+</div> -->

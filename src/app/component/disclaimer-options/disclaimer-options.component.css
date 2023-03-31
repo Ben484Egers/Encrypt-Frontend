@@ -1,0 +1,38 @@
+.disclaimer-options{
+    width: 90%;
+    margin: 0 auto;
+    min-height: 120px;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+
+}
+
+.disclaimer-options button{
+    padding: 1rem 1.5rem;
+    font-size: 1.5rem;
+    outline: none;
+    background: transparent;
+    border-radius: 6px;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.disclaimer-options .encrypt:hover{
+    background: var(--blue-dark);
+    color: #ffffff;
+}
+
+.disclaimer-options .decrypt:hover{
+    background: var(--red-dark);
+    color: #ffffff;
+}
+
+.encrypt{
+    border: 1px solid var(--blue-dark);
+    color: var(--blue-dark);
+}
+.decrypt{
+    border: 1px solid var(--red-dark);
+    color: var(--red-dark);
+}

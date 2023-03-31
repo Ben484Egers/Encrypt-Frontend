@@ -1,0 +1,152 @@
+.find-message,
+.decrypt-message{
+    width: 100%;
+    margin: 1rem 0;
+}
+
+.btn{
+    padding: 5px 10px;
+    background-color: transparent;
+    outline: none;
+    border-radius: 5px;
+    text-transform: uppercase;
+}
+
+.btn-decrypt{
+    color: #fff;
+    background-color: red;
+    border: none;
+    ;
+}
+.btn-delete{
+    color: red;
+    border: 1px solid red;
+}
+
+.btn-find{
+    color: var(--green);
+    border: 1px solid var(--green);
+    background-color: transparent;
+}
+
+.btn-find:hover{
+    background-color: var(--green);
+    color: #fff;
+}
+
+.btn-decrypt:hover{
+    opacity: 0.7;
+}
+.btn-delete:hover{
+    box-shadow: 5px 3px 10px rgba(0,0,0,0.2);
+}
+
+
+.outer-form{
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 0 1rem;
+}
+
+.find-cover{
+    width: 100px;
+}
+
+
+.form-control label{
+    font-size:1.5rem;
+    font-weight: 600;
+}
+.find-cover label{
+    opacity: 0 !important;
+}
+
+.outer-form textarea,
+.outer-form input[type=text]{
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
+    border: none;
+    background-color: #e4dfdf;
+}
+
+.outer-form .text{
+    flex: 4;
+}
+
+.outer-form .key{
+    flex: 1;
+}
+
+textarea{
+    resize: none;
+    outline: none;
+    min-height: 200px;
+    width: 100%;
+    min-width: 140px;
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+textarea[placeholder] {
+    font-size: 1.2rem;
+}
+
+input[type=number]{
+    width: 85px;
+    border-radius: 2px;
+    outline: none;
+}
+input[type=number]::placeholder {
+    font-size: 1rem;
+}
+
+@media (max-width: 600px) {
+
+    .find-message,
+    .decrypt-message{
+    margin: 0;
+    }
+
+    .find-message{
+        padding-top: 1rem;
+    }
+
+    .decrypt-message{
+        margin-top: -1.5rem;
+    }
+
+    .find-cover{
+        margin-top: -2.5rem;
+    }
+    .form-control label{
+        font-size:1.2rem;
+    }
+
+    .form-control input,
+    .form-control textarea{
+        font-size: 1rem;
+    }
+
+    .form-control textarea{
+        min-width: 250px;
+    }
+
+    input[type=number]{
+        width: 75px;
+    }
+
+    .key{
+        margin-top: -0.8rem;
+    }
+
+    input[type=number]::placeholder {
+        font-size: 0.8rem;
+    }
+
+    .outer-form2{
+        margin-bottom: 1rem;
+    }
+}
