@@ -108,10 +108,11 @@ private showError(text:string, title?:string) {
       return;
     }
 
+    const visualId: string = this.messageId;
+
     this.messageService.deleteMessage(this.msgPrimarykey).subscribe(
       () => {
-          // alert("Message has been deleted")
-          this.showInfo("Message with id: "+ this.messageId +" has been deleted!", "Message Deleted")
+          this.showInfo("Message with id: "+ visualId +" has been deleted!", "Message Deleted")
         },
         (error: HttpErrorResponse) => {
           this.showWarning(error.message, "Unable 2 Delete");
