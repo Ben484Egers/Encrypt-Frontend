@@ -26,12 +26,9 @@ export class AddMessageComponent implements OnInit {
   public onSubmit(){
     if(!this.encrypted){
       this.onEncrypt()
-    } else if (this.encrypted && this.tryAgain) {
-      this.encryptAgain();
     } else {
       this.saveCrypt();
     }
-     
   }
 
   private toastConfig: any = {
