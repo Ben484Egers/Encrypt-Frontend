@@ -15,6 +15,7 @@ export class AddMessageComponent implements OnInit {
   message!: string;
   key!: number;
   encrypted: boolean = false;
+  tryAgain: boolean = false;
 
 
   constructor(private messageService: MessageService, private toastr: ToastrService ) { }
@@ -25,16 +26,12 @@ export class AddMessageComponent implements OnInit {
   public onSubmit(){
     if(!this.encrypted){
       this.onEncrypt()
+    } else if (this.encrypted && this.tryAgain) {
+      this.encryptAgain();
     } else {
       this.saveCrypt();
     }
      
-  }
-
-  public encryptAgain() {
-    this.encrypted = false;
-    this.message = '';
-    this.key = 0;
   }
 
   private toastConfig: any = {
@@ -98,7 +95,14 @@ export class AddMessageComponent implements OnInit {
     );
     
     this.encrypted = true;
+    this.tryAgain = true;
 
+  }
+
+  public encryptAgain() {
+    this.encrypted = false;
+    this.message = '';
+    this.key = 0;
   }
 
   public saveCrypt(){
@@ -123,6 +127,7 @@ export class AddMessageComponent implements OnInit {
     );
 
     this.encrypted = false;
+    this.tryAgain = true;
   }
 
 }
