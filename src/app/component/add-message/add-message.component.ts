@@ -16,6 +16,7 @@ export class AddMessageComponent implements OnInit {
   key!: number;
   encrypted: boolean = false;
 
+
   constructor(private messageService: MessageService, private toastr: ToastrService ) { }
 
   ngOnInit(): void {
@@ -28,6 +29,12 @@ export class AddMessageComponent implements OnInit {
       this.saveCrypt();
     }
      
+  }
+
+  public encryptAgain() {
+    this.encrypted = false;
+    this.message = '';
+    this.key = 0;
   }
 
   private toastConfig: any = {

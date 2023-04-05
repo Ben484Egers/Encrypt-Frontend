@@ -30,6 +30,13 @@
     color: #fff;
 }
 
+input[type=submit]:disabled,
+button:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+
 
 .outer-form{
     width: 100%;
@@ -40,7 +47,14 @@
     align-items: flex-start;
     gap: 0 1rem;
 }
-
+.new-message{
+    margin-left: 1.5rem;
+    background-color: var(--green);
+    color:#fff;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
 .form-control label{
     font-size: 1.5rem;
     font-weight: 600;
@@ -56,6 +70,7 @@
 .outer-form .text{
     flex: 4;
 }
+
 
 .outer-form .key{
     flex: 1;

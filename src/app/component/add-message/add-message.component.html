@@ -11,8 +11,10 @@
     </div>
 
     <div class="outer-form2">
-        <input type="submit" value="Encrypt" class="btn btn-encrypt" *ngIf="!encrypted">
-        <button type="submit" class="btn btn-save" *ngIf="encrypted">Save</button>
+        <input type="submit" value="Encrypt" [disabled]='encrypted == true' class="btn btn-encrypt">
+        <input type="submit" value="Save" [disabled]='encrypted == false' class="btn btn-save">
+
+        <button class="btn new-message" *ngIf="encrypted" onclick="encryptAgain()">Encrypt New Message</button>
     </div>
 
 </form>
