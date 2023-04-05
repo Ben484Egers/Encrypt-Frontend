@@ -26,8 +26,8 @@
     </div>
 
     <div class="outer-form2">
-        <input type="submit" value="Decrypt" class="btn btn-decrypt" *ngIf="!decrypted">
-        <button type="submit" class="btn btn-delete" *ngIf="decrypted">Delete</button>
+        <input type="submit" value="Decrypt" class="btn btn-decrypt" [disabled]='decrypted == true'>
+        <input type="submit" value="Delete" class="btn btn-delete" [disabled]='decrypted == false'>
     </div>
 </form>
 

@@ -17,6 +17,7 @@ export class FindMessageComponent implements OnInit {
   key!: number;
   messageId!: string;
   decrypted: boolean = false;
+  
   constructor(private messageService: MessageService, private toastr: ToastrService ) { }
 
   ngOnInit(): void {
@@ -91,9 +92,9 @@ private showError(text:string, title?:string) {
 
     this.messageService.findMessage(this.messageId).subscribe(
       (response:  ServerMessage) => {
-        console.log(response)
           this.message = response.message
           this.msgPrimarykey = response.id
+          this.decrypted = false;
         },
         (error: HttpErrorResponse) => {
           // alert(error.message);
