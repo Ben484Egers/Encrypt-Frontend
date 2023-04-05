@@ -41,6 +41,11 @@
     box-shadow: 5px 3px 10px rgba(0,0,0,0.2);
 }
 
+input[type=submit]:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
 
 .outer-form{
     width: 100%;
