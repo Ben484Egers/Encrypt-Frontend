@@ -14,7 +14,7 @@
         <input type="submit" value="Encrypt" [disabled]='encrypted == true' class="btn btn-encrypt">
         <input type="submit" value="Save" [disabled]='encrypted == false' class="btn btn-save">
 
-        <div class="btn new-message" *ngIf="encrypted" onclick="encryptAgain()">Encrypt New Message</div>
+        <div class="btn new-message" *ngIf="tryAgain" onclick="encryptAgain()">Encrypt New Message</div>
     </div>
 
 </form>
