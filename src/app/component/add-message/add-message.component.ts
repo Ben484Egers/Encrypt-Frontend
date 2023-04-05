@@ -98,6 +98,7 @@ export class AddMessageComponent implements OnInit {
 
   public encryptAgain() {
     this.encrypted = false;
+    this.tryAgain = false;
     this.message = '';
     this.key = 0;
   }
