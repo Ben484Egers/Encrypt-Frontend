@@ -83,8 +83,10 @@ a{
         font-size: 1.5rem;
     }
 }
-@media (prefers-color-scheme: dark) {
-    a{
-        color: var(--black) !important;
+@media (prefers-color-scheme : dark) {
+    .social-links p,
+    .site-links a{
+        color: #000000;
     }
+
 }
