@@ -116,7 +116,7 @@ private showError(text:string, title?:string) {
           this.showInfo("Message with id: "+ visualId +" has been deleted!", "Message Deleted")
         },
         (error: HttpErrorResponse) => {
-          this.showWarning("Something went wrong", "Unable 2 Delete");
+          this.showWarning("Error while deleting", "Unable 2 Delete");
         }
     );
 

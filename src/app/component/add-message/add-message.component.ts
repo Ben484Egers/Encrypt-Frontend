@@ -120,7 +120,7 @@ export class AddMessageComponent implements OnInit {
         },
 
         (error: HttpErrorResponse) => {
-          this.showError(error.message, "Message Not Saved!");
+          this.showError("Error while saving", "Message Not Saved!");
         }
     );
 
