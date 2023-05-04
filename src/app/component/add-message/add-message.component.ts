@@ -87,7 +87,7 @@ export class AddMessageComponent implements OnInit {
           this.message = response;
         },
         (error: HttpErrorResponse) => {
-          this.showError(error.message, "Could not encrypt message.");
+          this.showError("Something went wrong", "Could not encrypt message.");
         }
     );
     

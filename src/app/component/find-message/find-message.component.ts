@@ -74,7 +74,7 @@ private showError(text:string, title?:string) {
           this.message = response;
         },
         (error: HttpErrorResponse) => {
-          this.showError(error.message, "Can't Decrypt Message");
+          this.showError("Something went wrong", "Can't Decrypt Message");
         }
     );
     this.decrypted = true;
@@ -116,7 +116,7 @@ private showError(text:string, title?:string) {
           this.showInfo("Message with id: "+ visualId +" has been deleted!", "Message Deleted")
         },
         (error: HttpErrorResponse) => {
-          this.showWarning(error.message, "Unable 2 Delete");
+          this.showWarning("Something went wrong", "Unable 2 Delete");
         }
     );
 
