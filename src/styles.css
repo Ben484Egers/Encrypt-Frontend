@@ -84,6 +84,7 @@ body {
 
 .outer-form2{
   width: 100%;
+  margin: 10px 0;;
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
@@ -92,6 +93,15 @@ body {
 .outer-form .text{
   flex: 4;
   min-width: 500px;
+}
+
+h2.enter-message{
+  margin-top: 2rem;
+}
+
+h2.keys-heading{
+    margin-top: 2.5rem;
+    text-align: center;
 }
 
 .aantal-keys{
@@ -132,7 +142,11 @@ body {
 
 
 @media (max-width: 600px) {
-  .outer-form .text{
-    min-width: 300px;
+  .outer-form .text {
+    min-width: 300px !important;
+  }
+  .add-message,
+  .decrypt-message{
+    margin: 5px 0 !important;
   }
 }
