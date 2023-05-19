@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Message } from 'src/app/Message';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { ServerMessage } from 'src/app/ServerMessage';
 import { MessageService } from 'src/app/services/message.service';
 import { ToastrService } from 'ngx-toastr';
@@ -11,15 +11,18 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./add-message.component.css']
 })
 export class AddMessageComponent implements OnInit {
-  @Output() onSubmitMsg: EventEmitter<Message> = new EventEmitter()
+  @Output() onSubmitMsg: EventEmitter<Message> = new EventEmitter();
+
   message!: string;
-  key!: number;
+  key_1!: number;
+  key_2?: number;
+  key_3?: number;
   encrypted: boolean = false;
   tryAgain: boolean = false;
-
+  
+  @Input() keys= 1;
 
   constructor(private messageService: MessageService, private toastr: ToastrService ) { }
-
   ngOnInit(): void {
   }
 
@@ -59,27 +62,49 @@ export class AddMessageComponent implements OnInit {
   }
 
   public onEncrypt(){
-    if(!this.message && !this.key){
-      this.showWarning('Please add a message AND a key', "Missing Arguments")
+    if(!this.message && !this.key_1){
+      this.showWarning('Please add a message AND atleast one key', "Missing Arguments")
       return;
     }
     if (!this.message){
       this.showWarning('Please add a message', "Missing Message")
       return;
     } 
-    if(!this.key){
+    if(!this.key_1){
       this.showWarning("Please add a encryption key", "Missing Key")
       return;
     }
 
-    if(this.key > 26){
+    if(this.key_1 > 26){
       this.showInfo("Key should be between 1 & 26, My bwoy", "Out Of Bounds")
+      return;
+    }
+
+    if(this.key_2 && this.key_2 > 26) {
+      this.showInfo("Key 2 should also be between 1 & 26, My bwoy", "Out Of Bounds")
+      return;
+    }
+
+    if(this.key_3 && this.key_3 > 26) {
+      this.showInfo("Key 3 should also be between 1 & 26, My bwoy", "Out Of Bounds")
       return;
     }
 
     const newMessage: Message = {
       message: this.message,
-      key: this.key
+      key_1: this.key_1
+    }
+
+    switch(this.keys){
+      case 2:
+      newMessage.key_2 = this.key_2;
+      break;
+      case 3:
+      newMessage.key_2 = this.key_2;
+      newMessage.key_3 = this.key_3;
+      break;
+      default:
+        break;
     }
 
     this.messageService.encryptMessage(newMessage).subscribe(
@@ -100,7 +125,9 @@ export class AddMessageComponent implements OnInit {
     this.encrypted = false;
     this.tryAgain = false;
     this.message = '';
-    this.key = 0;
+    this.key_1 = 0;
+    this.key_2 = 0;
+    this.key_3 = 0;
   }
 
   public saveCrypt(){

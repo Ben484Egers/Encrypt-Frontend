@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-encrypt-page',
@@ -9,7 +9,13 @@ export class EncryptPageComponent implements OnInit {
 
   constructor() { }
 
+  keys: number = 1;
+  
   ngOnInit(): void {
+  }
+
+  public setKey( keyNumber: number) {
+    this.keys = keyNumber;
   }
 
 }

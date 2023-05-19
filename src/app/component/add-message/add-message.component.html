@@ -4,9 +4,21 @@
             <label for="message">Message</label>
             <textarea name="message" [(ngModel)]="message" id="text" placeholder="Add message"></textarea>
         </div>
-        <div class="form-control key">
-            <label for="key">Key</label>
-            <input type="number" name="key" [(ngModel)]="key" id="number" max="26" min="1" placeholder="[1 - 26]">
+        <div class="keys">
+            <div class="form-control key key-1">
+                <label for="key-1">Key 1</label>
+                <input type="number" name="key-1" [(ngModel)]="key_1" id="number" max="26" min="1" placeholder="[1-26]">
+            </div>
+            <div class="form-control key key-2" *ngIf="keys == 2 || keys == 3">
+                <label for="key-2">Key 2</label>
+                <input type="number" name="key-2" [(ngModel)]="key_2" id="number" max="26" min="1"
+                    placeholder="[1 - 26]">
+            </div>
+            <div class="form-control key key-3" *ngIf="keys == 3">
+                <label for="key-3">Key 3</label>
+                <input type="number" name="key-3" [(ngModel)]="key_3" id="number" max="26" min="1"
+                    placeholder="[1 - 26]">
+            </div>
         </div>
     </div>
 

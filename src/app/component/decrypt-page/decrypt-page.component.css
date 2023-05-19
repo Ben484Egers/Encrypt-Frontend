@@ -1,3 +1,7 @@
 .container{
     min-height: 70vh;
 }
+
+h2{
+    margin-top: 2rem;
+}

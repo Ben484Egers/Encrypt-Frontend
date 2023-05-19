@@ -1,3 +1,9 @@
 <div class="container">
-    <app-find-message></app-find-message>
+    <h2>How many keys would you like to use:</h2>
+    <div class="aantal-keys">
+        <button (click)="setKey(1)" [ngClass]="keys == 1 ? 'active' : '' ">1 Key</button>
+        <button (click)="setKey(2)" [ngClass]="keys == 2 ? 'active' : '' ">2 Keys</button>
+        <button (click)="setKey(3)" [ngClass]="keys == 3 ? 'active' : '' ">3 Keys</button>
+    </div>
+    <app-find-message [keys]="keys"></app-find-message>
 </div>

@@ -1,7 +1,13 @@
 .add-message{
     width: 100%;
     margin: 1rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
 }
+
+
 
 .btn{
     padding: 10px 15px;
@@ -68,6 +74,7 @@ input[type=submit]:disabled {
 
 .outer-form .text{
     flex: 4;
+    min-width: 500px;
 }
 
 
@@ -98,6 +105,7 @@ textarea[placeholder] {
     outline: none;
 }
 
+
 @media (max-width: 600px) {
     .form-control label{
         font-size:1.2rem;
@@ -114,10 +122,6 @@ textarea[placeholder] {
 
     input[type=number]{
         width: 75px;
-    }
-
-    .key{
-        margin-top: -0.8rem;
     }
 
     input[type=number]::placeholder {

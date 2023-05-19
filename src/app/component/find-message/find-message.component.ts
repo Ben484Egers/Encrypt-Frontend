@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Message } from '../../Message';
 import { ServerMessage } from 'src/app/ServerMessage';
 import { MessageService } from 'src/app/services/message.service';
-import { Status } from 'src/app/Status';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -13,10 +12,14 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class FindMessageComponent implements OnInit {
   msgPrimarykey!: number
-  message!: string;
-  key!: number;
   messageId!: string;
+  message!: string;
+  key_1!: number;
+  key_2?: number;
+  key_3?: number;
   decrypted: boolean = false;
+
+  @Input() keys= 1;
   
   constructor(private messageService: MessageService, private toastr: ToastrService ) { }
 
@@ -59,14 +62,26 @@ private showError(text:string, title?:string) {
 
 
   public onDecrypt(){
-    if(!this.key){
+    if(!this.key_1){
       this.showWarning('Please add the corresponding key',"Missing Key")
       return;
     }
 
     const decryptMsg: Message = {
       message: this.message,
-      key: this.key
+      key_1: this.key_1
+    }
+
+    switch(this.keys){
+      case 2:
+      decryptMsg.key_2 = this.key_2;
+      break;
+      case 3:
+      decryptMsg.key_2 = this.key_2;
+      decryptMsg.key_3 = this.key_3;
+      break;
+      default:
+        break;
     }
 
     this.messageService.decryptMessage(decryptMsg).subscribe(
@@ -122,7 +137,9 @@ private showError(text:string, title?:string) {
 
     this.message= ''
     this.messageId= '';
-    this.key = 0;
+    this.key_1 = 0;
+    this.key_2 = 0;
+    this.key_3 = 0;
     this.decrypted = false;
   }
 

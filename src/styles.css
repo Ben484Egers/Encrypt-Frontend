@@ -36,6 +36,9 @@ body {
 .btn:focus {
   outline: none;
 }
+
+/* Form styles */
+
 .form-control {
   margin: 20px 0;
 }
@@ -70,4 +73,66 @@ body {
 .form-control-check input {
   flex: 2;
   height: 20px;
+}
+
+.keys{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.outer-form2{
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.outer-form .text{
+  flex: 4;
+  min-width: 500px;
+}
+
+.aantal-keys{
+  width: 100%;
+  margin: 1rem 0px 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.aantal-keys button{
+  padding: 10px 15px;
+  border-radius: 15px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: 1px solid var(--green);
+  background-color: transparent;
+  color: var(--green);
+  cursor: pointer;
+
+}
+
+.aantal-keys button.active{
+  color: #ffffff;
+  background-color: var(--green);
+}
+
+@media (max-width: 900px) {
+  .outer-form .text{
+      margin-bottom: -5px;
+  }
+
+  .outer-form .keys .form-control label{
+    font-size: 15px;
+  }
+}
+
+
+@media (max-width: 600px) {
+  .outer-form .text{
+    min-width: 300px;
+  }
 }
