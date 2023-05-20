@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./safe-info.component.css']
 })
 export class SafeInfoComponent implements OnInit {
-  safeMessage: string = 'We do not save the encryption key, for obvious reasons!'
+  safeMessage: string = 'We do not save the encryption key(s), for privacy reasons!'
   constructor() { }
 
   ngOnInit(): void {
