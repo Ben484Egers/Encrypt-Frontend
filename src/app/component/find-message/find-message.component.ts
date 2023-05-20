@@ -18,6 +18,7 @@ export class FindMessageComponent implements OnInit {
   key_2?: number;
   key_3?: number;
   decrypted: boolean = false;
+  tryAgain: boolean = false;
 
   @Input() keys= 1;
   
@@ -62,9 +63,36 @@ private showError(text:string, title?:string) {
 
 
   public onDecrypt(){
-    if(!this.key_1){
-      this.showWarning('Please add the corresponding key',"Missing Key")
+    if(!this.message && !this.key_1){
+      this.showWarning('Please add a message AND atleast one key', "Missing Arguments")
       return;
+    }
+    if (!this.message){
+      this.showWarning('Please add/find a message', "Missing Message")
+      return;
+    } 
+    if(!this.key_1){
+      this.showWarning("Please add your 1st encryption key", "Missing Key")
+      return;
+    }
+
+    if(this.key_1 > 26){
+      this.showInfo("Ur Key should be between 1 & 26", "Out Of Bounds")
+      return;
+    }
+
+    if(this.keys >= 2){
+      if(!this.key_2 || this.key_2 > 26) {
+        this.showInfo("Key 2 should be present & between 1 & 26", "Out Of Bounds")
+        return;
+      }
+    }
+
+    if(this.keys == 3) {
+      if(!this.key_3 || this.key_3 > 26){
+        this.showInfo("Key 3 should be present & between 1 & 26", "Out Of Bounds")
+        return;
+      }
     }
 
     const decryptMsg: Message = {
@@ -72,19 +100,17 @@ private showError(text:string, title?:string) {
       key_1: this.key_1
     }
 
-    switch(this.keys){
-      case 2:
-      decryptMsg.key_2 = this.key_2;
-      break;
-      case 3:
-      decryptMsg.key_2 = this.key_2;
-      decryptMsg.key_3 = this.key_3;
-      break;
-      default:
-        break;
+    if(this.keys == 2){
+      decryptMsg.key_2 = this.key_2
+    
     }
 
-    this.messageService.decryptMessage(decryptMsg).subscribe(
+    if(this.keys == 3){
+      decryptMsg.key_2 = this.key_2
+      decryptMsg.key_3 = this.key_3
+    }
+
+    this.messageService.decryptMessage(decryptMsg, this.keys).subscribe(
       (response: string) => {
           this.message = response;
         },
@@ -93,6 +119,13 @@ private showError(text:string, title?:string) {
         }
     );
     this.decrypted = true;
+    this.tryAgain = true;
+  }
+
+  public decryptAgain() {
+    this.decrypted = false;
+    this.tryAgain = false;
+    this.message = '';
   }
 
   public findMessage(){

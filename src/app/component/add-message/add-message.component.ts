@@ -71,48 +71,50 @@ export class AddMessageComponent implements OnInit {
       return;
     } 
     if(!this.key_1){
-      this.showWarning("Please add a encryption key", "Missing Key")
+      this.showWarning("Please add your 1st encryption key", "Missing Key")
       return;
     }
 
     if(this.key_1 > 26){
-      this.showInfo("Key should be between 1 & 26, My bwoy", "Out Of Bounds")
+      this.showInfo("Ur Key should be between 1 & 26", "Out Of Bounds")
       return;
     }
 
-    if(this.key_2 && this.key_2 > 26) {
-      this.showInfo("Key 2 should also be between 1 & 26, My bwoy", "Out Of Bounds")
-      return;
+    if(this.keys >= 2){
+      if(!this.key_2 || this.key_2 > 26) {
+        this.showInfo("Key 2 should be present & between 1 & 26", "Out Of Bounds")
+        return;
+      }
     }
 
-    if(this.key_3 && this.key_3 > 26) {
-      this.showInfo("Key 3 should also be between 1 & 26, My bwoy", "Out Of Bounds")
-      return;
+    if(this.keys == 3) {
+      if(!this.key_3 || this.key_3 > 26){
+        this.showInfo("Key 3 should be present & between 1 & 26", "Out Of Bounds")
+        return;
+      }
     }
 
     const newMessage: Message = {
       message: this.message,
-      key_1: this.key_1
+      key_1: this.key_1,
     }
 
-    switch(this.keys){
-      case 2:
-      newMessage.key_2 = this.key_2;
-      break;
-      case 3:
-      newMessage.key_2 = this.key_2;
-      newMessage.key_3 = this.key_3;
-      break;
-      default:
-        break;
+    if(this.keys == 2){
+      newMessage.key_2 = this.key_2
+    
     }
 
-    this.messageService.encryptMessage(newMessage).subscribe(
+    if(this.keys == 3){
+      newMessage.key_2 = this.key_2
+      newMessage.key_3 = this.key_3
+    }
+
+    this.messageService.encryptMessage(newMessage, this.keys).subscribe(
       (response: string) => {
           this.message = response;
         },
         (error: HttpErrorResponse) => {
-          this.showError("Something went wrong", "Could not encrypt message.");
+          this.showError("Something went wrong", "Could not encrypt message." + error.message);
         }
     );
     
@@ -125,9 +127,6 @@ export class AddMessageComponent implements OnInit {
     this.encrypted = false;
     this.tryAgain = false;
     this.message = '';
-    this.key_1 = 0;
-    this.key_2 = 0;
-    this.key_3 = 0;
   }
 
   public saveCrypt(){

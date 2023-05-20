@@ -46,6 +46,15 @@
     box-shadow: 5px 3px 10px rgba(0,0,0,0.2);
 }
 
+.decrypt-again{
+    margin-left: 1.5rem;
+    background-color: purple;
+    color:#fff;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+
 input[type=submit]:disabled {
     pointer-events: none;
     opacity: 0.5;

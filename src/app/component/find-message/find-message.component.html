@@ -40,5 +40,6 @@
     <div class="outer-form2">
         <input type="submit" value="Decrypt" class="btn btn-decrypt" [disabled]='decrypted == true'>
         <input type="submit" value="Delete" class="btn btn-delete" [disabled]='decrypted == false'>
+        <div class="btn decrypt-again" *ngIf="tryAgain" (click)="decryptAgain()">Decrypt again</div>
     </div>
 </form>
