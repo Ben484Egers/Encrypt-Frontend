@@ -13,7 +13,6 @@ import { CryptButtonComponent } from './component/crypt-button/crypt-button.comp
 import { FindMessageComponent } from './component/find-message/find-message.component';
 import { IntroCardsComponent } from './component/intro-cards/intro-cards.component';
 import { DisclaimerOptionsComponent } from './component/disclaimer-options/disclaimer-options.component';
-import { KeyOptionsComponent } from './component/key-options/key-options.component';
 import { SafeInfoComponent } from './component/safe-info/safe-info.component';
 import { HomeComponent } from './component/home/home.component';
 import { EncryptPageComponent } from './component/encrypt-page/encrypt-page.component';
@@ -35,7 +34,6 @@ const appRoutes: Routes = [
     FindMessageComponent,
     IntroCardsComponent,
     DisclaimerOptionsComponent,
-    KeyOptionsComponent,
     SafeInfoComponent,
     HomeComponent,
     EncryptPageComponent,
