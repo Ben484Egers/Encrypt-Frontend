@@ -115,7 +115,7 @@ private showError(text:string, title?:string) {
           this.message = response;
         },
         (error: HttpErrorResponse) => {
-          this.showError("Something went wrong", "Can't Decrypt Message");
+          this.showError("Free resources are used up", "Can't Decrypt Message");
         }
     );
     this.decrypted = true;
@@ -164,7 +164,7 @@ private showError(text:string, title?:string) {
           this.showInfo("Message with id: "+ visualId +" has been deleted!", "Message Deleted")
         },
         (error: HttpErrorResponse) => {
-          this.showWarning("Error while deleting", "Unable 2 Delete");
+          this.showWarning("Free resources are used up", "Unable 2 Delete");
         }
     );
 

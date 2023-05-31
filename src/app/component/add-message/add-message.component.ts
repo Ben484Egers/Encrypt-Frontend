@@ -114,7 +114,7 @@ export class AddMessageComponent implements OnInit {
           this.message = response;
         },
         (error: HttpErrorResponse) => {
-          this.showError("Something went wrong", "Could not encrypt message." + error.message);
+          this.showError("Free resources are used up", "Could not encrypt message.");
         }
     );
     
@@ -146,7 +146,7 @@ export class AddMessageComponent implements OnInit {
         },
 
         (error: HttpErrorResponse) => {
-          this.showError("Error while saving", "Message Not Saved!");
+          this.showError("Free resources are used up", "Message Not Saved!");
         }
     );
 
