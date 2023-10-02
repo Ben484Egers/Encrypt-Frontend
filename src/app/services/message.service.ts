@@ -38,11 +38,11 @@ export class MessageService {
     return this.http.get<any>(`${this.apiServerUrl}/find/${messageId}`)
   }
 
-  public encryptMessage(message: Message, keys: number): Observable<string>{
-    return this.http.post<string>(`${this.apiServerUrl}/encrypt/${keys}`,message, httpOptions)
-  }
-  public decryptMessage( message : Message, keys: number): Observable<string>{
-    return this.http.post<string>(`${this.apiServerUrl}/decrypt/${keys}`, message, httpOptions)
-  }
+  // public encryptMessage(message: Message, keys: number): Observable<string>{
+  //   return this.http.post<string>(`${this.apiServerUrl}/encrypt/${keys}`,message, httpOptions)
+  // }
+  // public decryptMessage( message : Message, keys: number): Observable<string>{
+  //   return this.http.post<string>(`${this.apiServerUrl}/decrypt/${keys}`, message, httpOptions)
+  // }
 
 }
