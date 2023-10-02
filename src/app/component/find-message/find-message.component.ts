@@ -1,3 +1,4 @@
+import { EncryptionService } from './../../services/encryption.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Message } from '../../Message';
@@ -15,14 +16,14 @@ export class FindMessageComponent implements OnInit {
   messageId!: string;
   message!: string;
   key_1!: number;
-  key_2?: number;
-  key_3?: number;
+  key_2: number = 0;
+  key_3: number = 0;
   decrypted: boolean = false;
   tryAgain: boolean = false;
 
   @Input() keys= 1;
   
-  constructor(private messageService: MessageService, private toastr: ToastrService ) { }
+  constructor(private messageService: MessageService, private encryptionService: EncryptionService ,private toastr: ToastrService ) { }
 
   ngOnInit(): void {
   }
@@ -77,47 +78,39 @@ private showError(text:string, title?:string) {
     }
 
     if(this.key_1 > 26){
-      this.showInfo("Ur Key should be between 1 & 26", "Out Of Bounds")
+      this.showInfo("Your Keys should be between 0 & 26", "Out Of Bounds")
       return;
     }
 
     if(this.keys >= 2){
-      if(!this.key_2 || this.key_2 > 26) {
-        this.showInfo("Key 2 should be present & between 1 & 26", "Out Of Bounds")
+      if(this.key_2 > 26) {
+        this.showInfo("Key 2 should be between 0 & 26", "Out Of Bounds")
         return;
       }
     }
 
     if(this.keys == 3) {
-      if(!this.key_3 || this.key_3 > 26){
-        this.showInfo("Key 3 should be present & between 1 & 26", "Out Of Bounds")
+      if(this.key_3 > 26){
+        this.showInfo("Key 3 should be between 0 & 26", "Out Of Bounds")
         return;
       }
     }
 
     const decryptMsg: Message = {
       message: this.message,
-      key_1: this.key_1
+      keys: [this.key_1],
     }
 
     if(this.keys == 2){
-      decryptMsg.key_2 = this.key_2
-    
+      decryptMsg.keys = [this.key_1, this.key_2]
     }
 
     if(this.keys == 3){
-      decryptMsg.key_2 = this.key_2
-      decryptMsg.key_3 = this.key_3
+      decryptMsg.keys = [this.key_1, this.key_2, this.key_3]
     }
 
-    this.messageService.decryptMessage(decryptMsg, this.keys).subscribe(
-      (response: string) => {
-          this.message = response;
-        },
-        (error: HttpErrorResponse) => {
-          this.showError("Free resources are used up", "Can't Decrypt Message");
-        }
-    );
+    let decryptedMessage = this.encryptionService.decryptMessage(decryptMsg)
+    this.message = decryptedMessage;
     this.decrypted = true;
     this.tryAgain = true;
   }

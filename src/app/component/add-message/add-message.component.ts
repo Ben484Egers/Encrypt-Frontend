@@ -1,9 +1,11 @@
+import { EncryptionService } from './../../services/encryption.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Message } from 'src/app/Message';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { ServerMessage } from 'src/app/ServerMessage';
 import { MessageService } from 'src/app/services/message.service';
 import { ToastrService } from 'ngx-toastr';
+import { MessageDTO } from 'src/app/MessageDTO';
 
 @Component({
   selector: 'app-add-message',
@@ -15,14 +17,14 @@ export class AddMessageComponent implements OnInit {
 
   message!: string;
   key_1!: number;
-  key_2?: number;
-  key_3?: number;
+  key_2: number = 0;
+  key_3: number = 0;
   encrypted: boolean = false;
   tryAgain: boolean = false;
   
   @Input() keys= 1;
 
-  constructor(private messageService: MessageService, private toastr: ToastrService ) { }
+  constructor(private messageService: MessageService, private encryptionService: EncryptionService ,private toastr: ToastrService ) { }
   ngOnInit(): void {
   }
 
@@ -76,48 +78,39 @@ export class AddMessageComponent implements OnInit {
     }
 
     if(this.key_1 > 26){
-      this.showInfo("Ur Key should be between 1 & 26", "Out Of Bounds")
+      this.showInfo("Ur Key should be between 0 & 26", "Out Of Bounds")
       return;
     }
 
     if(this.keys >= 2){
-      if(!this.key_2 || this.key_2 > 26) {
-        this.showInfo("Key 2 should be present & between 1 & 26", "Out Of Bounds")
+      if(this.key_2 > 26) {
+        this.showInfo("Key 2 should be between 0 & 26", "Out Of Bounds")
         return;
       }
     }
 
     if(this.keys == 3) {
-      if(!this.key_3 || this.key_3 > 26){
-        this.showInfo("Key 3 should be present & between 1 & 26", "Out Of Bounds")
+      if(this.key_3 > 26){
+        this.showInfo("Key 3 should be between 0 & 26", "Out Of Bounds")
         return;
       }
     }
 
     const newMessage: Message = {
       message: this.message,
-      key_1: this.key_1,
+      keys: [this.key_1],
     }
 
     if(this.keys == 2){
-      newMessage.key_2 = this.key_2
-    
+      newMessage.keys = [this.key_1, this.key_2]
     }
 
     if(this.keys == 3){
-      newMessage.key_2 = this.key_2
-      newMessage.key_3 = this.key_3
+      newMessage.keys = [this.key_1, this.key_2, this.key_3]
     }
 
-    this.messageService.encryptMessage(newMessage, this.keys).subscribe(
-      (response: string) => {
-          this.message = response;
-        },
-        (error: HttpErrorResponse) => {
-          this.showError("Free resources are used up", "Could not encrypt message.");
-        }
-    );
-    
+    let encryptedMessage = this.encryptionService.encryptMessage(newMessage)
+    this.message = encryptedMessage;
     this.encrypted = true;
     this.tryAgain = true;
 
@@ -135,7 +128,7 @@ export class AddMessageComponent implements OnInit {
       return;
     }
 
-    const msg: Message = {
+    const msg: MessageDTO = {
       message:  this.message
     }
 

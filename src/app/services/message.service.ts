@@ -5,6 +5,7 @@ import { Message } from '../Message';
 import { environment } from 'src/environments/environment';
 import { ServerMessage } from '../ServerMessage';
 import { Status } from '../Status';
+import { MessageDTO } from '../MessageDTO';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -23,8 +24,8 @@ export class MessageService {
   // public getMessages(): Observable<ServerMessage[]>{
   //   return this.http.get<ServerMessage[]>(`${this.apiServerUrl}`)
   // }
-  public addMessage(message: Message): Observable<number>{
-    return this.http.post<number>(`${this.apiServerUrl}/post`, message, httpOptions)
+  public addMessage(message: MessageDTO): Observable<number>{
+    return this.http.post<number>(`${this.apiServerUrl}`, message, httpOptions)
   }
   // public updateMessage(message: Message): Observable<Message>{
   //   return this.http.put<Message>(`${this.apiServerUrl}/update`, message)
