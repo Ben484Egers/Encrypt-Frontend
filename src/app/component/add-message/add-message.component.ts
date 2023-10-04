@@ -122,7 +122,7 @@ export class AddMessageComponent implements OnInit {
       this.showError("Message could not be saved, please try again..", "Something went wrong!");
     } else {
       this.showSuccess("🌴Message has been added✨, Find your message id in the text input", "Message added")
-        this.message = "Your message id: " + msg_id;
+      this.message = "Your message id: " + msg_id;
     }
 
     this.encrypted = false;
