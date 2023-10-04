@@ -4,6 +4,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Message } from '../../Message';
 import { MessageService } from 'src/app/services/message.service';
 import { ToastrService } from 'ngx-toastr';
+import { ServerMessage } from 'src/app/ServerMessage';
 
 @Component({
   selector: 'app-find-message',
@@ -111,28 +112,17 @@ private showError(text:string, title?:string) {
       id: this.messageId
     }
 
-    const response = await this.messageService.findMessage(this.messageId);
-
-    if(response.data) {
-      this.message = response.data.message
-      this.showSuccess("🌴✨", "Message found")
-      this.decrypted = false;
-      
-    } else {
-      this.showError("🚩🚨", "Message not found!");
-    }
-
-    // this.messageService.findMessage(this.messageId).subscribe(
-    //   (response:  ServerMessage) => {
-    //       this.message = response.message
-    //       this.msgPrimarykey = response.id
-    //       this.decrypted = false;
-    //     },
-    //     (error: HttpErrorResponse) => {
-    //       // alert(error.message);
-    //       this.showError("No message found with id: " + this.messageId,"Message Not Found")
-    //     }
-    // );
+    this.messageService.findMessage(this.messageId).subscribe(
+     (response:  ServerMessage) => {
+          this.message = response.message
+          this.msgPrimarykey = response.id
+          this.decrypted = false;
+        },
+        (error: HttpErrorResponse) => {
+          // alert(error.message);
+          this.showError("No message found with id: " + this.messageId,"Message Not Found")
+        }
+    );
 
   }
    public async deleteMessage(){
@@ -143,22 +133,15 @@ private showError(text:string, title?:string) {
 
     const visualId: string = this.messageId;
 
-    const response = await this.messageService.deleteMessage(this.messageId);
 
-    if(response.error) {
-      this.showWarning("Something went wrong", "Unable 2 Delete");      
-    } else {
-      this.showInfo("Message with id: "+ visualId +" has been deleted!", "Message Deleted")
-    }
-
-    // this.messageService.deleteMessage(this.messageId).subscribe(
-    //   () => {
-    //       this.showInfo("Message with id: "+ visualId +" has been deleted!", "Message Deleted")
-    //     },
-    //     (error: HttpErrorResponse) => {
-    //       this.showWarning("Free resources are used up", "Unable 2 Delete");
-    //     }
-    // );
+    this.messageService.deleteMessage(this.msgPrimarykey).subscribe(
+      () => {
+          this.showInfo("Message with id: "+ visualId +" has been deleted!", "Message Deleted")
+        },
+        (error: HttpErrorResponse) => {
+          this.showWarning("Free resources are used up", "Unable 2 Delete");
+        }
+    );
 
     this.message= ''
     this.messageId= '';

@@ -2,7 +2,6 @@ import { EncryptionService } from './../../services/encryption.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Message } from 'src/app/Message';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { ServerMessage } from 'src/app/ServerMessage';
 import { MessageService } from 'src/app/services/message.service';
 import { ToastrService } from 'ngx-toastr';
 import { MessageDTO } from 'src/app/MessageDTO';
@@ -113,15 +112,16 @@ export class AddMessageComponent implements OnInit {
       message:  this.message
     }
 
-    const response = await this.messageService.addMessage(msg);
-    
-    if(response.error) {
-      this.showError("Message could not be saved, please try again..", "Something went wrong!");
-    } else {
-      this.showSuccess("🌴Message has been added✨, Find your message id in the text input", "Message added")
-        this.message = "Your message id: " + response.msg_id;
-    }
-
+    this.messageService.addMessage(msg).subscribe(
+      (response:  number) => {
+          this.showSuccess("🌴Message has been added✨, Find your message id in the text input", "Message added")
+          this.message = "Your message id: " + response;
+         },
+         (error: HttpErrorResponse) => {
+           // alert(error.message);
+           this.showError("Message could not be saved, please try again..", "Something went wrong!");
+          }
+     );
     this.encrypted = false;
     this.tryAgain = true;
   }
