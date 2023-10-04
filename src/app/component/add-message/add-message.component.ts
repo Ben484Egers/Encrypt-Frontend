@@ -77,25 +77,6 @@ export class AddMessageComponent implements OnInit {
       return;
     }
 
-    if(this.key_1 > 26){
-      this.showInfo("Ur Key should be between 0 & 26", "Out Of Bounds")
-      return;
-    }
-
-    if(this.keys >= 2){
-      if(this.key_2 > 26) {
-        this.showInfo("Key 2 should be between 0 & 26", "Out Of Bounds")
-        return;
-      }
-    }
-
-    if(this.keys == 3) {
-      if(this.key_3 > 26){
-        this.showInfo("Key 3 should be between 0 & 26", "Out Of Bounds")
-        return;
-      }
-    }
-
     const newMessage: Message = {
       message: this.message,
       keys: [this.key_1],
@@ -122,7 +103,7 @@ export class AddMessageComponent implements OnInit {
     this.message = '';
   }
 
-  public saveCrypt(){
+  public async saveCrypt(){
     if(!this.message){
       this.showInfo('Can\'t save an empty field', "Missing message")
       return;
@@ -132,16 +113,14 @@ export class AddMessageComponent implements OnInit {
       message:  this.message
     }
 
-    this.messageService.addMessage(msg).subscribe(
-      (msgId) => {
-        this.showSuccess("🌴Message has been added✨, Find your message id in the text input", "Message added")
-        this.message = "Your message id: " + msgId;
-        },
-
-        (error: HttpErrorResponse) => {
-          this.showError("Free resources are used up", "Message Not Saved!");
-        }
-    );
+    const response = await this.messageService.addMessage(msg);
+    
+    if(response.error) {
+      this.showError("Message could not be saved, please try again..", "Something went wrong!");
+    } else {
+      this.showSuccess("🌴Message has been added✨, Find your message id in the text input", "Message added")
+        this.message = "Your message id: " + response.msg_id;
+    }
 
     this.encrypted = false;
     this.tryAgain = true;

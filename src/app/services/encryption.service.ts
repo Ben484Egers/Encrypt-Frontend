@@ -28,6 +28,11 @@ export class EncryptionService {
           keyIndex = 0;
         }
 
+        //If encryption key is bigger than 26, divide by 26 and return remainder.
+        if(keys[keyIndex] > 26) {
+            keys[keyIndex] = keys[keyIndex] % 26
+        }
+
         //Shift charcode with current key
         charCode += keys[keyIndex]
 
@@ -76,6 +81,11 @@ export class EncryptionService {
         if(keyIndex >= keys.length){
           keyIndex = 0;
         }
+
+        //If encryption key is bigger than 26, divide by 26 and return remainder.
+        if(keys[keyIndex] > 26) {
+          keys[keyIndex] = keys[keyIndex] % 26
+      }
         //Shift charcode with current key
         charCode -= keys[keyIndex]
 

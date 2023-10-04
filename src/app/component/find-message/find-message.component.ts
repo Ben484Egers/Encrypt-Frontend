@@ -2,7 +2,6 @@ import { EncryptionService } from './../../services/encryption.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Message } from '../../Message';
-import { ServerMessage } from 'src/app/ServerMessage';
 import { MessageService } from 'src/app/services/message.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -77,25 +76,6 @@ private showError(text:string, title?:string) {
       return;
     }
 
-    if(this.key_1 > 26){
-      this.showInfo("Your Keys should be between 0 & 26", "Out Of Bounds")
-      return;
-    }
-
-    if(this.keys >= 2){
-      if(this.key_2 > 26) {
-        this.showInfo("Key 2 should be between 0 & 26", "Out Of Bounds")
-        return;
-      }
-    }
-
-    if(this.keys == 3) {
-      if(this.key_3 > 26){
-        this.showInfo("Key 3 should be between 0 & 26", "Out Of Bounds")
-        return;
-      }
-    }
-
     const decryptMsg: Message = {
       message: this.message,
       keys: [this.key_1],
@@ -121,7 +101,7 @@ private showError(text:string, title?:string) {
     this.message = '';
   }
 
-  public findMessage(){
+  public async findMessage(){
     if(!this.messageId){
       this.showInfo('Please enter a message Id', "No Id")
       return;
@@ -131,20 +111,31 @@ private showError(text:string, title?:string) {
       id: this.messageId
     }
 
-    this.messageService.findMessage(this.messageId).subscribe(
-      (response:  ServerMessage) => {
-          this.message = response.message
-          this.msgPrimarykey = response.id
-          this.decrypted = false;
-        },
-        (error: HttpErrorResponse) => {
-          // alert(error.message);
-          this.showError("No message found with id: " + this.messageId,"Message Not Found")
-        }
-    );
+    const response = await this.messageService.findMessage(this.messageId);
+
+    if(response.data) {
+      this.message = response.data.message
+      this.showSuccess("🌴✨", "Message found")
+      this.decrypted = false;
+      
+    } else {
+      this.showError("🚩🚨", "Message not found!");
+    }
+
+    // this.messageService.findMessage(this.messageId).subscribe(
+    //   (response:  ServerMessage) => {
+    //       this.message = response.message
+    //       this.msgPrimarykey = response.id
+    //       this.decrypted = false;
+    //     },
+    //     (error: HttpErrorResponse) => {
+    //       // alert(error.message);
+    //       this.showError("No message found with id: " + this.messageId,"Message Not Found")
+    //     }
+    // );
 
   }
-   public deleteMessage(){
+   public async deleteMessage(){
     if(!this.message){
       this.showInfo('Can\'t delete an empty field', "Empty Field")
       return;
@@ -152,14 +143,22 @@ private showError(text:string, title?:string) {
 
     const visualId: string = this.messageId;
 
-    this.messageService.deleteMessage(this.msgPrimarykey).subscribe(
-      () => {
-          this.showInfo("Message with id: "+ visualId +" has been deleted!", "Message Deleted")
-        },
-        (error: HttpErrorResponse) => {
-          this.showWarning("Free resources are used up", "Unable 2 Delete");
-        }
-    );
+    const response = await this.messageService.deleteMessage(this.messageId);
+
+    if(response.error) {
+      this.showWarning("Something went wrong", "Unable 2 Delete");      
+    } else {
+      this.showInfo("Message with id: "+ visualId +" has been deleted!", "Message Deleted")
+    }
+
+    // this.messageService.deleteMessage(this.messageId).subscribe(
+    //   () => {
+    //       this.showInfo("Message with id: "+ visualId +" has been deleted!", "Message Deleted")
+    //     },
+    //     (error: HttpErrorResponse) => {
+    //       this.showWarning("Free resources are used up", "Unable 2 Delete");
+    //     }
+    // );
 
     this.message= ''
     this.messageId= '';
