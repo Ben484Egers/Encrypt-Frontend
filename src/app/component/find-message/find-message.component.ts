@@ -1,6 +1,5 @@
 import { EncryptionService } from './../../services/encryption.service';
 import { Component, OnInit, Input } from '@angular/core';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Message } from '../../Message';
 import { MessageService } from 'src/app/services/message.service';
 import { ToastrService } from 'ngx-toastr';
@@ -122,20 +121,9 @@ private showError(text:string, title?:string) {
       this.showError("🚩🚨", "Message not found!");
     }
 
-    // this.messageService.findMessage(this.messageId).subscribe(
-    //   (response:  ServerMessage) => {
-    //       this.message = response.message
-    //       this.msgPrimarykey = response.id
-    //       this.decrypted = false;
-    //     },
-    //     (error: HttpErrorResponse) => {
-    //       // alert(error.message);
-    //       this.showError("No message found with id: " + this.messageId,"Message Not Found")
-    //     }
-    // );
-
   }
-   public async deleteMessage(){
+
+  public async deleteMessage(){
     if(!this.message){
       this.showInfo('Can\'t delete an empty field', "Empty Field")
       return;
@@ -151,15 +139,6 @@ private showError(text:string, title?:string) {
       this.showInfo("Message with id: "+ visualId +" has been deleted!", "Message Deleted")
     }
 
-    // this.messageService.deleteMessage(this.messageId).subscribe(
-    //   () => {
-    //       this.showInfo("Message with id: "+ visualId +" has been deleted!", "Message Deleted")
-    //     },
-    //     (error: HttpErrorResponse) => {
-    //       this.showWarning("Free resources are used up", "Unable 2 Delete");
-    //     }
-    // );
-
     this.message= ''
     this.messageId= '';
     this.key_1 = 0;
@@ -169,6 +148,3 @@ private showError(text:string, title?:string) {
   }
 
 }
-
-
-  

@@ -1,8 +1,6 @@
 import { EncryptionService } from './../../services/encryption.service';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Message } from 'src/app/Message';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { ServerMessage } from 'src/app/ServerMessage';
 import { MessageService } from 'src/app/services/message.service';
 import { ToastrService } from 'ngx-toastr';
 import { MessageDTO } from 'src/app/MessageDTO';
@@ -109,8 +107,13 @@ export class AddMessageComponent implements OnInit {
       return;
     }
 
+    const msg_id = Math.floor(100000 + Math.random() * 900000);
+    const created = new Date();
+
     const msg: MessageDTO = {
-      message:  this.message
+      message:  this.message,
+      msg_id: msg_id,
+      created: created
     }
 
     const response = await this.messageService.addMessage(msg);
@@ -119,7 +122,7 @@ export class AddMessageComponent implements OnInit {
       this.showError("Message could not be saved, please try again..", "Something went wrong!");
     } else {
       this.showSuccess("🌴Message has been added✨, Find your message id in the text input", "Message added")
-        this.message = "Your message id: " + response.msg_id;
+        this.message = "Your message id: " + msg_id;
     }
 
     this.encrypted = false;
